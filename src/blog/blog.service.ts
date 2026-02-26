@@ -1,14 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { CreateBlogDto } from './dto/create-blog.dto';
-import { UpdateBlogDto } from './dto/update-blog.dto';
+import { PrismaService } from '../prisma/prisma.service.js';
+import { CreateBlogDto } from './dto/create-blog.dto.js';
+import { UpdateBlogDto } from './dto/update-blog.dto.js';
+
+
 
 @Injectable()
 export class BlogService {
+  constructor(private prisma: PrismaService) {} 
   create(createBlogDto: CreateBlogDto) {
     return 'This action adds a new blog';
   }
 
-  findAll() {
+  async findAll() {
+    return await this.prisma.user.findMany();
     return `This action returns all blog`;
   }
 
