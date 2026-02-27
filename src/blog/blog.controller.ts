@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { BlogService } from './blog.service.js';
-import { CreateBlogDto } from './dto/create-blog.dto.js';
+import { CreateArtigoDto} from './dto/create-blog.dto.js';
 import { UpdateBlogDto } from './dto/update-blog.dto.js';
 
 @Controller('blog')
@@ -21,32 +21,33 @@ export class BlogController {
 //6- excluir um artigo
 
 
-
+// ============== Rota Criaçao Artigo =================
 
   @Post()
-  create(@Body() createBlogDto: CreateBlogDto) {
-    return this.blogService.create(createBlogDto)
+  create(@Body() CriaArtigo: CreateArtigoDto ) {
+    return this.blogService.create(CriaArtigo)
+    return console.log( " Ok")
     
   }
 
-  @Get()
-  async findAll() {
-    console.log("dwwadawdaw")
-    return await this.blogService.findAll();
-  }
+  // @Get()
+  // async findAll() {
+  //   console.log("dwwadawdaw")
+  //   return await this.blogService.findAll();
+  // }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.blogService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.blogService.findOne(+id);
+  // }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBlogDto: UpdateBlogDto) {
-    return this.blogService.update(+id, updateBlogDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateBlogDto: UpdateBlogDto) {
+  //   return this.blogService.update(+id, updateBlogDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.blogService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.blogService.remove(+id);
+  // }
 }

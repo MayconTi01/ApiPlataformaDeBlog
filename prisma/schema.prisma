@@ -14,18 +14,38 @@ datasource db {
   provider = "mysql"
 }
 
-model User { 
+model Artigo { 
   id    Int     @id @default(autoincrement()) 
-  email String  @unique
-  name  String?
-  posts Post[]
+  titulo String  @unique
+  DescricaoDoArtigo   String
+  Autor String 
+  DataPubli DateTime @default(now())
+  Tags String 
+
+  @@map("Artigos")
 } 
 
-model Post { 
-  id        Int     @id @default(autoincrement()) 
-  title     String
-  content   String? @db.Text
-  published Boolean @default(false) 
-  author    User    @relation(fields: [authorId], references: [id]) 
-  authorId  Int
-} 
+// model Post { 
+//   id        Int     @id @default(autoincrement()) 
+//   title     String
+//   content   String? @db.Text
+//   published Boolean @default(false) 
+//   author    User    @relation(fields: [authorId], references: [id]) 
+//   authorId  Int
+// } 
+
+// 🎯 Estrutura mental definitiva
+
+// Um model é composto por:
+
+// Nome da entidade
+
+// Campos
+
+// Tipos
+
+// Atributos (@id, @default, @unique…)
+
+// Relacionamentos (opcional)
+
+// Atributos de model (@@index, @@map…)
