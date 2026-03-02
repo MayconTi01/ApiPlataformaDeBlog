@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put } from '@nestjs/common';
 import { BlogService } from './blog.service.js';
 import { CreateArtigoDto} from './dto/create-blog.dto.js';
 import { UpdateBlogDto } from './dto/update-blog.dto.js';
@@ -16,9 +16,9 @@ export class BlogController {
 
 //4- pesquisar artidos com filtro data ou tegs  
 
-//5- editar um artigo por id 
+//5- editar um artigo por id  
 
-//6- excluir um artigo
+//6- excluir um artigo 
 
 
 // ============== Rota Criaçao Artigo =================
@@ -50,8 +50,12 @@ export class BlogController {
   ListarPorTag(@Param('Tags') Tags:string) {
   return this.blogService.ListarPorTag(Tags);
 }
-@Query()
-  // @Patch(':id')
+//@Query()
+
+// =============== Rota de atulização de de artigo por id ========================
+
+
+  //  @Put(':id')
   // update(@Param('id') id: string, @Body() updateBlogDto: UpdateBlogDto) {
   //   return this.blogService.update(+id, updateBlogDto);
   // }

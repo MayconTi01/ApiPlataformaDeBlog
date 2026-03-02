@@ -55,9 +55,13 @@ async Listarid(id: number) {
   return artigoId;
   }
 
-// ======== Listar po tag  ======================
+// ======== Listar po tags ou datas   ======================
 
 async ListarPorTag(tags: string) {
+
+//entrada: acessar do tipo tag, data , ou teg e data 
+//process: criar função =>  
+
 
   const artigo = await this.prisma.artigo.findMany( { 
     where: { Tags: tags  }
@@ -65,9 +69,28 @@ async ListarPorTag(tags: string) {
   return artigo ;
   }
 
-  // update(id: number, updateBlogDto: UpdateBlogDto) { 
-  //   return `This action updates a #${id} blog`;
-  // }
+// ====== editar artigo por id ================
+
+// entrada: selecionar rota put com id => fazer alteração no corpo 
+// process: verifica se artigo existe => atualiza dados do artigo para o novo body => retorna 
+// saida: body que era antes => body esta agora => mensagem confirmando alteração. 
+
+// update(id: number, updateBlogDto: UpdateBlogDto) { 
+  
+
+// const verificaArtigo = this.prisma.artigo.findUnique({ 
+//     where: {  id : id } 
+// })
+//   if(verificaArtigo) { 
+
+//   }
+//   }
+// 1 - configurar dto de update 
+// 2- criar função, adicionando dto de atualização
+//
+
+
+
 
   // remove(id: number) {
   //   return `This action removes a #${id} blog`;

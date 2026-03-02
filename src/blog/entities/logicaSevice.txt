@@ -23,3 +23,4 @@ CRUD:
   //1- Criar função 
   //2- 
 
+3- LISTAR ARTIGOS POR ID ( LOGICA DE PROGRAMAÇÃO) 
