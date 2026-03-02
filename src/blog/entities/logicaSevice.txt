@@ -1,0 +1,25 @@
+CRUD: 
+
+1- CRIAÇÃO DE ARTIGO ( LOGICA DE PROGRAMAÇÃO )
+
+            entrada: Editar corpo da requisição 
+    process: prisma comando de criação => salva no banco 
+            saida: messagem de sucesso
+    1- criar DTO de criação
+    2- Adicionar conecxão com o prisma 
+    3- Adicionar o DTO de criação de artigo
+    4 - verificar se existe algum artigo com o mesmo titulo 
+    5- Usar metodo creat do prisma oara novo artigo 
+    6-  retornar messagem de sucesso  
+
+
+
+2- LISTAR TODOS OS ARTIGOS EXISTENTES ( LOGICA DE PROGRAMAÇÃO )
+
+ // entrada: chamada da rota get de listagem 
+  // process: verifica no banco => lista todos os artigos => 
+  // saida: retorna todos os artigos 
+
+  //1- Criar função 
+  //2- 
+

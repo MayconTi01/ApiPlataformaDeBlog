@@ -8,11 +8,11 @@ export class BlogController {
   constructor(private readonly blogService: BlogService) {}
 
 
-//1 - criar artigos 
+//1 - criar artigos  - ok 
 
-//2- pesquisar todos os artigos 
+//2- pesquisar todos os artigos - Ok 
 
-//3- pesquisar artigo por id 
+//3- pesquisar artigo por id - ok 
 
 //4- pesquisar artidos com filtro data ou tegs 
 
@@ -30,16 +30,20 @@ export class BlogController {
     
   }
 
-  // @Get()
-  // async findAll() {
-  //   console.log("dwwadawdaw")
-  //   return await this.blogService.findAll();
-  // }
+  // =========== Rota de listagem de todos os artigos =============================
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.blogService.findOne(+id);
-  // }
+  @Get()
+  async findAll() {
+    //return console.log("dwwadawdaw")
+    return this.blogService.findAll();
+  } 
+
+  // ================== Rota de listagem de artigo por id ==================================
+@Get(':id')
+findOne(@Param('id') id: number) {
+  return this.blogService.findOne(+id);
+}
+
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateBlogDto: UpdateBlogDto) {
@@ -49,5 +53,5 @@ export class BlogController {
   // @Delete(':id')
   // remove(@Param('id') id: string) {
   //   return this.blogService.remove(+id);
-  // }
 }
+

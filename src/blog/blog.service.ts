@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { CreateArtigoDto} from './dto/create-blog.dto.js';
 import { UpdateBlogDto } from './dto/update-blog.dto.js';
+import {ConflictException} from '@nestjs/common'
 
 
 
@@ -12,40 +13,47 @@ export class BlogService { // definição das funções do blog
 
   constructor(private prisma: PrismaService) {} // conecxão com o prisma
    async create(CriaArtigo: CreateArtigoDto ) { // DTO de banco de dados
-    /// entrada: Editar corpo da requisição 
-    /// process: prisma comando de criação => salva no banco 
-    /// saida: messagem de sucesso
-    const artigoExiste = await this.prisma.artigo.findUnique( { 
-      where: { titulo: CriaArtigo.titulo } }) 
-    console.log(artigoExiste)
-
-    const novoArtigo = await this.prisma.artigo.create({
+    /// 
+    const artigoExiste = await this.prisma.artigo.findUnique( {   // verifica se existe dado igual usando função prisma 
+      where: { titulo: CriaArtigo.titulo } }) ; 
+      if (artigoExiste){   // validação e resposta da verificação. 
+        throw new ConflictException('Já existe um artigo com esse título.') } ; 
+  
+    const novoArtigo = await this.prisma.artigo.create({  
     data: {
       titulo: CriaArtigo.titulo,
       DescricaoDoArtigo: CriaArtigo.DescricaoDoArtigo,
       Autor: CriaArtigo.Autor,
       Tags: CriaArtigo.Tags
-    } })
-
-    return novoArtigo; 
-    // //  1- criar DTO de criação
-    // // 2- Adicionar conecxão com o prisma 
-    // // 3- Adicionar o DTO de criação de artigo
-
-    // 4 - verificar se existe algum artigo com o mesmo titulo 
+    } }) 
+    console.log(novoArtigo);
     
-    // 4- Usar metodo creat do prisma 
+    return {
+      dados: novoArtigo, 
+      Sucesso : "Seu artigo foi criado com sucesso"
+    }
+
+// 
+   
 } 
+
+// ==================== Listar todos os dados ==========================
+async findAll() {
+  const todosOsArtigos = await this.prisma.artigo.findMany();
+  return {  message: "Lista de artigos completa",  
+    TodosOsArtigos: todosOsArtigos  
+   
+  }} ;
+
+  // ==================== Listar artigos por id  ==================================
   
+async findOne(id: number) {
 
-  // async findAll() {
-  //   return await this.prisma.user.findMany();
-  //   return `This action returns all blog`; 
-  // }
-
-  // findOne(id: number) {
-  //   return `This action returns a #${id} blog`;
-  // }
+  const artigo = await this.prisma.artigo.findUnique( { 
+    where: { id : id }
+  })
+  return artigo ;
+  }
 
   // update(id: number, updateBlogDto: UpdateBlogDto) { 
   //   return `This action updates a #${id} blog`;
@@ -53,5 +61,5 @@ export class BlogService { // definição das funções do blog
 
   // remove(id: number) {
   //   return `This action removes a #${id} blog`;
-  // }
+  // } 
 } 
