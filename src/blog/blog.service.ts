@@ -47,10 +47,20 @@ async findAll() {
 
   // ==================== Listar artigos por id  ==================================
   
-async findOne(id: number) {
+async Listarid(id: number) {
 
-  const artigo = await this.prisma.artigo.findUnique( { 
+  const artigoId = await this.prisma.artigo.findUnique( { 
     where: { id : id }
+  })
+  return artigoId;
+  }
+
+// ======== Listar po tag  ======================
+
+async ListarPorTag(tags: string) {
+
+  const artigo = await this.prisma.artigo.findMany( { 
+    where: { Tags: tags  }
   })
   return artigo ;
   }
