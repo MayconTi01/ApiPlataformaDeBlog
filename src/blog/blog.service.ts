@@ -93,9 +93,43 @@ const artigoAtualizado = await this.prisma.artigo.update( {
     data: artigoAtualizado
   };
 } 
+/* 
+entrada: pesrquisar url por id 
+                                        ==> SIM existe: ==> excluir artigo usando metodo prisma          
+process: verifica se id existe no banco | 
+                                        ==> Não existe ==> messagem que não existe o artigo  
+saida =>  retorna menssagem que artigo foi ezxcluido com sucesso
+*/ 
+
+/*  
+1- criar função que consulta dado no banco pelo id  do artigo
+                                                                          ==> Sim: avança para excluir      
+2- fazer validadação, que aguarda retorno do banco para ver se id existe  | 
+                                                                          ==> não: messagem que diz que artigo existe
+3- criar varivel que recebe dado do id exclui do banco, usando metodo prisma 
+4- retorna mensagem que confirma exclução do artigo   
+
+*/ 
 
 
-remove(id: number) {
-  return `This action removes a #${id} blog`;
+async remove(id: number) {
+
+
+  const verificacao = await this.prisma.artigo.findUnique( { 
+      where: {  
+      id: id 
+    }
+  })
+  if(!verificacao) { 
+     throw new NotFoundException('Artigo não encontrado');
+  }
+  const artigoDeletar =  await this.prisma.artigo.delete( { 
+    where: {  
+      id: id 
+    }
+  })
+  return  {
+    message: "Artigo deletado com sucesso", 
+    artigoDeletado: artigoDeletar }
  } 
 } 
