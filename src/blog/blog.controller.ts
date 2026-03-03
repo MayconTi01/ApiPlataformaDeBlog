@@ -46,11 +46,10 @@ export class BlogController {
 
 // =================== Rota de listagem de artigos por tags =================
 
-@Get('tag/:Tags')
-  ListarPorTag(@Param('Tags') Tags:string) {
-  return this.blogService.ListarPorTag(Tags);
+@Get()
+  ListarPorTag(@Query('tags') tags?:string, @Query('data') DataPubli?: string) {
+  return this.blogService.ListarPorTagData(tags,DataPubli);
 }
-//@Query()
 
 // =============== Rota de atulização de de artigo por id ========================
 

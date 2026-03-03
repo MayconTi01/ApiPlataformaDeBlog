@@ -36,3 +36,17 @@ process: verifica se artigo existe => atualiza dados do artigo para o novo body 
 3- criar a validação que aguarda o retorno para ver se arquivo existe no banco 
 4- criar varivel  que aguarda o dado e faz a atualização de artigos com metodo update do prisma
 5- retorno da função, com messagem de sucesso, e novo dado atualizado
+
+5- DELETAR ARTIGO 
+
+
+                        entrada: pesrquisar url por id 
+process: verifica se id existe no banco ==> excluir artigo usando metodo prisma       
+                        saida =>  retorna menssagem que artigo foi ezxcluido com sucesso
+                        
+1- criar função que consulta dado no banco pelo id  do artigo
+                                                                          ==> Sim: avança para excluir      
+2- fazer validadação, que aguarda retorno do banco para ver se id existe  | 
+                                                                          ==> não: messagem que diz que artigo existe
+3- criar varivel que recebe dado do id exclui do banco, usando metodo prisma 
+4- retorna mensagem que confirma exclução do artigo   

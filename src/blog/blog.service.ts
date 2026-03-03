@@ -57,14 +57,19 @@ async Listarid(id: number) {
 
 // ======== Listar po tags ou datas   ======================
 
-async ListarPorTag(tags: string) {
+async ListarPorTagData(tags?: string, DataPubli?: string) {
 
-//entrada: acessar do tipo tag, data , ou teg e data 
-//process: criar função =>  
-
-
+//entrada: acessar url query opcionais do tipo tag, data , ou teg e data 
+//process: criar função 
+let filtro: {
+    Tags?: string,
+    Data?: string
+  } = {} 
+  if (tags) filtro['tags'] = tags
+  if (DataPubli) filtro['data'] = DataPubli
+  console.log(filtro)
   const artigo = await this.prisma.artigo.findMany( { 
-    where: { Tags: tags  }
+    where: filtro
   })
   return artigo ;
   }
@@ -93,25 +98,9 @@ const artigoAtualizado = await this.prisma.artigo.update( {
     data: artigoAtualizado
   };
 } 
-/* 
-entrada: pesrquisar url por id 
-                                        ==> SIM existe: ==> excluir artigo usando metodo prisma          
-process: verifica se id existe no banco | 
-                                        ==> Não existe ==> messagem que não existe o artigo  
-saida =>  retorna menssagem que artigo foi ezxcluido com sucesso
-*/ 
-
-/*  
-1- criar função que consulta dado no banco pelo id  do artigo
-                                                                          ==> Sim: avança para excluir      
-2- fazer validadação, que aguarda retorno do banco para ver se id existe  | 
-                                                                          ==> não: messagem que diz que artigo existe
-3- criar varivel que recebe dado do id exclui do banco, usando metodo prisma 
-4- retorna mensagem que confirma exclução do artigo   
-
-*/ 
 
 
+//=========================== DELETAR ARQUIVOS ==============================
 async remove(id: number) {
 
 
