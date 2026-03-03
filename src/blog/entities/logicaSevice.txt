@@ -24,3 +24,15 @@ CRUD:
   //2- 
 
 3- LISTAR ARTIGOS POR ID ( LOGICA DE PROGRAMAÇÃO) 
+
+
+4- EDITAR / ATUALIZAR ARTIGOS (LOGICA DE PROGRAMAÇÃO)
+        entrada: selecionar rota put com id => fazer alteração no corpo 
+process: verifica se artigo existe => atualiza dados do artigo para o novo body => retorna 
+        saida: body que era antes => body esta agora => mensagem confirmando alteração. 
+
+1- configurar dto de update 
+2- criar função que consulta o banco , adicionando dto de atualização 
+3- criar a validação que aguarda o retorno para ver se arquivo existe no banco 
+4- criar varivel  que aguarda o dado e faz a atualização de artigos com metodo update do prisma
+5- retorno da função, com messagem de sucesso, e novo dado atualizado

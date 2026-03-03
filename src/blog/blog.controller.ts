@@ -60,9 +60,13 @@ export class BlogController {
     return this.blogService.update(+id, updateBlogDto);
   }
 
-  // @Delete(':id')
 
-  // remove(@Param('id') id: string) {
-  //   return this.blogService.remove(+id);
-}
+//=============== Rota para deletar artigo ===============================
 
+  @Delete(':id')
+
+  remove(@Param('id') id: string) {
+    return this.blogService.remove(+id);
+  } 
+  
+} 

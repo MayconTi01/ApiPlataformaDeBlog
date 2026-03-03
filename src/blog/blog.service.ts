@@ -71,9 +71,7 @@ async ListarPorTag(tags: string) {
 
 // ====== editar artigo por id ================
 
-// entrada: selecionar rota put com id => fazer alteração no corpo 
-// process: verifica se artigo existe => atualiza dados do artigo para o novo body => retorna 
-// saida: body que era antes => body esta agora => mensagem confirmando alteração. 
+
 
 async update(id: number, updateBlogDto: UpdateBlogDto) { 
   
@@ -85,7 +83,7 @@ const verificaArtigo = await this.prisma.artigo.findUnique({
    { 
     throw new NotFoundException('Artigo não encontrado'); // verificação FUNCIONANDO 
   }
-const artigoAtualizado = this.prisma.artigo.update( {
+const artigoAtualizado = await this.prisma.artigo.update( {
     where : { id : id }, 
     data: updateBlogDto  } ) 
   
@@ -95,15 +93,9 @@ const artigoAtualizado = this.prisma.artigo.update( {
     data: artigoAtualizado
   };
 } 
-// 1 - configurar dto de update 
-// 2- criar função, adicionando dto de atualização
-// 3- criar a validação para ver se arquivo existe no banco 
-// 4- criar varivel de atualização de artigos com metodo update do prisma
-// 5- 
 
 
-
-  // remove(id: number) {
-  //   return `This action removes a #${id} blog`;
-  // } 
+remove(id: number) {
+  return `This action removes a #${id} blog`;
+ } 
 } 
