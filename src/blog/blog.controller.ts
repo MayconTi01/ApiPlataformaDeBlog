@@ -55,10 +55,10 @@ export class BlogController {
 // =============== Rota de atulização de de artigo por id ========================
 
 
-  //  @Put(':id')
-  // update(@Param('id') id: string, @Body() updateBlogDto: UpdateBlogDto) {
-  //   return this.blogService.update(+id, updateBlogDto);
-  // }
+   @Put(':id')
+  update(@Param('id') id: number, @Body() updateBlogDto: UpdateBlogDto) {
+    return this.blogService.update(+id, updateBlogDto);
+  }
 
   // @Delete(':id')
 

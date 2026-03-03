@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { CreateArtigoDto} from './dto/create-blog.dto.js';
 import { UpdateBlogDto } from './dto/update-blog.dto.js';
-import {ConflictException} from '@nestjs/common'
+import {ConflictException, NotFoundException} from '@nestjs/common'
 
 
 
@@ -75,20 +75,31 @@ async ListarPorTag(tags: string) {
 // process: verifica se artigo existe => atualiza dados do artigo para o novo body => retorna 
 // saida: body que era antes => body esta agora => mensagem confirmando alteração. 
 
-// update(id: number, updateBlogDto: UpdateBlogDto) { 
+async update(id: number, updateBlogDto: UpdateBlogDto) { 
   
 
-// const verificaArtigo = this.prisma.artigo.findUnique({ 
-//     where: {  id : id } 
-// })
-//   if(verificaArtigo) { 
-
-//   }
-//   }
+const verificaArtigo = await this.prisma.artigo.findUnique({ 
+    where: {  id : id } 
+})
+  if(!verificaArtigo) 
+   { 
+    throw new NotFoundException('Artigo não encontrado'); // verificação FUNCIONANDO 
+  }
+const artigoAtualizado = this.prisma.artigo.update( {
+    where : { id : id }, 
+    data: updateBlogDto  } ) 
+  
+    
+  return {
+    message: 'Artigo atualizado com sucesso',
+    data: artigoAtualizado
+  };
+} 
 // 1 - configurar dto de update 
 // 2- criar função, adicionando dto de atualização
-//
-
+// 3- criar a validação para ver se arquivo existe no banco 
+// 4- criar varivel de atualização de artigos com metodo update do prisma
+// 5- 
 
 
 
