@@ -30,7 +30,7 @@ export class BlogController {
     
   }
 
-  // =========== Rota de listagem de todos os artigos =============================
+// =========== Rota de listagem de todos os artigos =============================
 
   @Get()
   async findAll() {
@@ -38,18 +38,19 @@ export class BlogController {
     return this.blogService.findAll();
   } 
 
-  // ================== Rota de listagem de artigo por id ==================================
+// =================== Rota de listagem de artigos por tags =================                   
+@Get('filtro')
+  ListarPorTag(@Query('tags') tags:string) {
+  return this.blogService.ListarPorTagData(tags);
+}
+
+// ================== Rota de listagem de artigo por id ================================== 
 @Get(':id')
   Listarid(@Param('id') id: string) {
   return this.blogService.Listarid(+id);
 }
 
-// =================== Rota de listagem de artigos por tags =================
 
-@Get()
-  ListarPorTag(@Query('tags') tags?:string, @Query('data') DataPubli?: string) {
-  return this.blogService.ListarPorTagData(tags,DataPubli);
-}
 
 // =============== Rota de atulização de de artigo por id ========================
 

@@ -53,26 +53,53 @@ async Listarid(id: number) {
     where: { id : id }
   })
   return artigoId;
-  }
+  } ; 
 
 // ======== Listar po tags ou datas   ======================
 
-async ListarPorTagData(tags?: string, DataPubli?: string) {
+async ListarPorTagData(tags: string) { 
 
-//entrada: acessar url query opcionais do tipo tag, data , ou teg e data 
-//process: criar função 
-let filtro: {
-    Tags?: string,
-    Data?: string
-  } = {} 
-  if (tags) filtro['tags'] = tags
-  if (DataPubli) filtro['data'] = DataPubli
-  console.log(filtro)
-  const artigo = await this.prisma.artigo.findMany( { 
-    where: filtro
-  })
-  return artigo ;
-  }
+  const verifica = await this.prisma.artigo.findMany({ 
+    where: { Tags : tags}  
+  }) 
+  if(verifica.length === 0 ) { 
+     throw new NotFoundException('Artigo não encontrado');
+  } 
+  return verifica
+}; 
+/* 
+entrada: acessar url query opcionais do tipo tag, data , ou teg e data 
+process: verificar se dado existe => lista todos os aetigos com aquele dado 
+saida: Retorna a lista de todos os artigos com o dado
+
+1- Criar função que recebe o DTO tags 
+                                                                     ==> Se não existe a dado com o tipo de tag salva, retorna erro com mensagem  
+2- criar variavel que verifica esse dto com metodo prima findMany => | 
+                                                                     ==> Se existe, segui o fluxo 
+3- criar uma variavel que recebe a pesquisa da teg usando metodo do prisma 
+*/ 
+
+
+
+
+
+
+
+
+
+
+// let filtro: {
+//     Tags?: string,
+//     Data?: string
+//   } = {} 
+//   if (tags) filtro['tags'] = tags
+//   if (DataPubli) filtro['data'] = DataPubli
+//   console.log(filtro)
+//   const artigo = await this.prisma.artigo.findMany( { 
+//     where: filtro
+//   })
+//   return artigo ;
+  
 
 // ====== editar artigo por id ================
 
