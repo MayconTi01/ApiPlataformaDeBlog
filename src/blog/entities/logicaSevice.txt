@@ -16,37 +16,59 @@ CRUD:
 
 2- LISTAR TODOS OS ARTIGOS EXISTENTES ( LOGICA DE PROGRAMAÇÃO )
 
- // entrada: chamada da rota get de listagem 
-  // process: verifica no banco => lista todos os artigos => 
-  // saida: retorna todos os artigos 
+                entrada: chamada da rota get de listagem 
+        process: verifica no banco => lista todos os artigos => 
+                saida: retorna todos os artigos 
 
-  //1- Criar função 
-  //2- 
+  1- Criar função sem parametro 
+  2- criar variavel que recebe metodo prisma findMany
+  3- retornar variavel
 
-3- LISTAR ARTIGOS POR ID ( LOGICA DE PROGRAMAÇÃO) 
+
+3- LISTAR ARTIGOS POR FILTRO DE TAGS OU DATAS ( LOGICA DE PROGRAMAÇÃO)
+
+                entrada: acessar url query opcionais do tipo tag, data , ou teg e data 
+        process: verificar se dado existe => lista todos os artigos com o dado da query
+                saida: Retorna a lista de todos os artigos com o dado
+
+        1- Criar função que recebe o DTO tags e datas 
+                                                                     ==> Se não existe o dado com o tipo de tag ou data salva, retorna erro com mensagem  
+        2- criar variavel que verifica esse dto com metodo prima findMany => | 
+                                                                     ==> Se existe, segui o fluxo 
+        3- retorna variavel de verificação 
 
 
-4- EDITAR / ATUALIZAR ARTIGOS (LOGICA DE PROGRAMAÇÃO)
+4- LISTAR ARTIGOS POR ID ( LOGICA DE PROGRAMAÇÃO) 
+
+                entrada: selecionar rota get com id 
+        process: cria função => pesquisa por parametro id usando metodo prisma e salva em variavel
+                saida => retorna lista de todos os artigos 
+        1- Criar função com parametro do id 
+        2- criar varivel que recebe metodo prisa findUnique para id 
+        3- retorna variavel 
+
+
+5- EDITAR / ATUALIZAR ARTIGOS (LOGICA DE PROGRAMAÇÃO)
         entrada: selecionar rota put com id => fazer alteração no corpo 
-process: verifica se artigo existe => atualiza dados do artigo para o novo body => retorna 
+ process: verifica se artigo existe => atualiza dados do artigo para o novo body => retorna 
         saida: body que era antes => body esta agora => mensagem confirmando alteração. 
 
-1- configurar dto de update 
-2- criar função que consulta o banco , adicionando dto de atualização 
-3- criar a validação que aguarda o retorno para ver se arquivo existe no banco 
-4- criar varivel  que aguarda o dado e faz a atualização de artigos com metodo update do prisma
-5- retorno da função, com messagem de sucesso, e novo dado atualizado
+        1- configurar dto de update 
+        2- criar função que consulta o banco , adicionando dto de atualização 
+        3- criar a validação que aguarda o retorno para ver se arquivo existe no banco 
+        4- criar varivel  que aguarda o dado e faz a atualização de artigos com metodo update do prisma
+        5- retorno da função, com messagem de sucesso, e novo dado atualizado
 
-5- DELETAR ARTIGO 
+6- DELETAR ARTIGO 
 
 
                         entrada: pesrquisar url por id 
-process: verifica se id existe no banco ==> excluir artigo usando metodo prisma       
+ process: verifica se id existe no banco ==> excluir artigo usando metodo prisma       
                         saida =>  retorna menssagem que artigo foi ezxcluido com sucesso
                         
-1- criar função que consulta dado no banco pelo id  do artigo
-                                                                          ==> Sim: avança para excluir      
-2- fazer validadação, que aguarda retorno do banco para ver se id existe  | 
-                                                                          ==> não: messagem que diz que artigo existe
-3- criar varivel que recebe dado do id exclui do banco, usando metodo prisma 
-4- retorna mensagem que confirma exclução do artigo   
+        1- criar função que consulta dado no banco pelo id  do artigo
+                                                                                   ==> Sim: avança para excluir      
+        2- fazer validadação, que aguarda retorno do banco para ver se id existe  | 
+                                                                                   ==> não: messagem que diz que artigo existe
+        3- criar varivel que recebe dado do id exclui do banco, usando metodo prisma 
+        4- retorna mensagem que confirma exclução do artigo   
