@@ -1,0 +1,59 @@
+arquivos para configuração do prisma ORM: 
+
+1. pasta prisma => schema.prisma
+2. prisma.config.ts 
+3. .env 
+
+
+ ==================================1.  pasta prisma => schema.prisma =================
+
+    como estava o arequivo: 
+        generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+  moduleFormat    = "cjs"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Artigo { 
+  id    Int     @id @default(autoincrement()) 
+  titulo String  @unique
+  DescricaoDoArtigo   String
+  Autor String 
+  DataPubli DateTime @default(now())
+  Tags String 
+
+  @@map("Artigos")
+} 
+
+
+====================== prisma.config ================================
+
+import "dotenv/config";
+import { defineConfig } from "prisma/config";
+
+export default defineConfig({
+  schema: "prisma/schema.prisma",
+  migrations: {
+    path: "prisma/migrations",
+  },
+  datasource: {
+    url: process.env["DATABASE_URL"],
+  },
+});
+
+========================= modulo prisma ==================
+
+imoport do modulo em app.module.ts 
+
+import { Module } from '@nestjs/common'
+import { PrismaModule } from './prisma/prisma.module.js';
+import { BlogModule } from './blog/blog.module.js';
+
+@Module({
+  imports: [PrismaModule, BlogModule],
+})
+export class AppModule {} 
